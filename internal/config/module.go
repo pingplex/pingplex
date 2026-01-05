@@ -2,7 +2,7 @@ package config
 
 import (
 	"github.com/go-core-fx/fiberfx"
-	"github.com/pingplex/pingplex/internal/example"
+	"github.com/pingplex/pingplex/pkg/gocqlfx"
 	"go.uber.org/fx"
 )
 
@@ -17,9 +17,12 @@ func Module() fx.Option {
 				Proxies:     cfg.HTTP.Proxies,
 			}
 		}),
-		fx.Provide(func(cfg Config) example.Config {
-			return example.Config{
-				Example: cfg.Example.Example,
+		fx.Provide(func(cfg Config) gocqlfx.Config {
+			return gocqlfx.Config{
+				Hosts:    cfg.Database.Hosts,
+				Keyspace: cfg.Database.Keyspace,
+				Username: cfg.Database.Username,
+				Password: cfg.Database.Password,
 			}
 		}),
 	)
