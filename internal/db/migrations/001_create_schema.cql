@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS targets_by_user (
     enabled boolean,
     created_at timestamp,
     PRIMARY KEY ((user_id), target_id)
-);
+) WITH CLUSTERING ORDER BY (target_id ASC);
 
 CREATE TABLE IF NOT EXISTS agents (
     id uuid PRIMARY KEY,
