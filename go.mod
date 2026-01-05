@@ -1,12 +1,14 @@
 module github.com/pingplex/pingplex
 
-go 1.24.3
+go 1.25.0
 
 require (
 	github.com/go-core-fx/config v0.1.0
 	github.com/go-core-fx/fiberfx v0.1.0
 	github.com/go-core-fx/logger v0.0.1
+	github.com/gocql/gocql v1.7.0
 	github.com/prometheus/client_golang v1.23.2
+	github.com/scylladb/gocqlx/v3 v3.0.4
 	go.uber.org/fx v1.24.0
 	go.uber.org/zap v1.27.1
 )
@@ -41,6 +43,7 @@ require (
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.67.4 // indirect
 	github.com/prometheus/procfs v0.19.2 // indirect
+	github.com/scylladb/go-reflectx v1.0.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.68.0 // indirect
 	go.opentelemetry.io/otel v1.39.0 // indirect
@@ -52,4 +55,8 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/sys v0.39.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
+	gopkg.in/inf.v0 v0.9.1 // indirect
 )
+
+// Use the latest version of scylladb/gocql; check for updates at https://github.com/scylladb/gocql/releases
+replace github.com/gocql/gocql => github.com/scylladb/gocql v1.17.0
