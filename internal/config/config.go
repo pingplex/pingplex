@@ -13,14 +13,16 @@ type http struct {
 	Proxies     []string `koanf:"proxies"`
 }
 
-type exampleConfig struct {
-	Example string `koanf:"example"`
+type database struct {
+	Hosts    []string `koanf:"hosts"`
+	Keyspace string   `koanf:"keyspace"`
+	Username string   `koanf:"username"`
+	Password string   `koanf:"password"`
 }
 
 type Config struct {
-	HTTP http `koanf:"http"`
-
-	Example exampleConfig `koanf:"example"`
+	HTTP     http     `koanf:"http"`
+	Database database `koanf:"database"`
 }
 
 func Default() Config {
@@ -30,9 +32,11 @@ func Default() Config {
 			ProxyHeader: "X-Forwarded-For",
 			Proxies:     []string{},
 		},
-
-		Example: exampleConfig{
-			Example: "example",
+		Database: database{
+			Hosts:    []string{"127.0.0.1:9042"},
+			Keyspace: "pingplex",
+			Username: "",
+			Password: "",
 		},
 	}
 }
