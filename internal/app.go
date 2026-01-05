@@ -3,10 +3,10 @@ package internal
 import (
 	"context"
 
-	"github.com/capcom6/go-project-template/internal/config"
-	"github.com/capcom6/go-project-template/internal/example"
-	"github.com/capcom6/go-project-template/internal/server"
 	"github.com/go-core-fx/logger"
+	"github.com/pingplex/pingplex/internal/config"
+	"github.com/pingplex/pingplex/internal/example"
+	"github.com/pingplex/pingplex/internal/server"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 )

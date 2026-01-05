@@ -1,8 +1,8 @@
 package config
 
 import (
-	"github.com/capcom6/go-project-template/internal/example"
 	"github.com/go-core-fx/fiberfx"
+	"github.com/pingplex/pingplex/internal/example"
 	"go.uber.org/fx"
 )
 
