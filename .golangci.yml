@@ -334,6 +334,10 @@ linters:
         # https://github.com/godoc-lint/godoc-lint?tab=readme-ov-file#no-unused-link
         - no-unused-link
 
+    gomoddirectives:
+      replace-allow-list:
+        - github.com/gocql/gocql
+
     govet:
       # Enable all analyzers.
       # Default: false
