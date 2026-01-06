@@ -10,7 +10,6 @@ import (
 	"github.com/pingplex/pingplex/internal/server"
 	"github.com/pingplex/pingplex/pkg/gocqlfx"
 	"github.com/pingplex/pingplex/pkg/gocqlxfx"
-	"github.com/scylladb/gocqlx/v3"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 )
@@ -33,7 +32,7 @@ func Run() {
 		// BUSINESS MODULES
 		// example.Module(),
 		//
-		fx.Invoke(func(lc fx.Lifecycle, _ gocqlx.Session, logger *zap.Logger) {
+		fx.Invoke(func(lc fx.Lifecycle, logger *zap.Logger) {
 			lc.Append(fx.Hook{
 				OnStart: func(_ context.Context) error {
 					logger.Info("app started")

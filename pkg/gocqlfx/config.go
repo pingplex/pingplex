@@ -1,5 +1,7 @@
 package gocqlfx
 
+import "fmt"
+
 // Config holds the configuration for Cassandra/ScyllaDB database connection.
 type Config struct {
 	// Hosts is a list of database node addresses
@@ -10,4 +12,11 @@ type Config struct {
 	Username string
 	// Password for database authentication
 	Password string
+}
+
+func (c Config) Validate() error {
+	if len(c.Hosts) == 0 {
+		return fmt.Errorf("%w: at least one host is required", ErrInvalidConfig)
+	}
+	return nil
 }
