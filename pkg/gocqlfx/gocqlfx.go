@@ -7,6 +7,10 @@ import (
 )
 
 func New(config Config) (*gocql.Session, error) {
+	if err := config.Validate(); err != nil {
+		return nil, err
+	}
+
 	cluster := gocql.NewCluster(config.Hosts...)
 	cluster.Keyspace = config.Keyspace
 	cluster.Consistency = gocql.Quorum
