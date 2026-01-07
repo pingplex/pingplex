@@ -6,6 +6,7 @@ require (
 	github.com/go-core-fx/config v0.1.0
 	github.com/go-core-fx/fiberfx v0.1.0
 	github.com/go-core-fx/logger v0.0.1
+	github.com/go-core-fx/redisfx v0.0.0-20251029094515-c9e3d82dfaa2
 	github.com/gocql/gocql v1.7.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/scylladb/gocqlx/v3 v3.0.4
@@ -20,6 +21,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/clipperhouse/stringish v0.1.1 // indirect
 	github.com/clipperhouse/uax29/v2 v2.3.0 // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/go-core-fx/fxutil v0.0.0-20251027105421-acea37162eb9 // indirect
 	github.com/go-viper/mapstructure/v2 v2.4.0 // indirect
@@ -43,6 +45,7 @@ require (
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.67.4 // indirect
 	github.com/prometheus/procfs v0.19.2 // indirect
+	github.com/redis/go-redis/v9 v9.17.2 // indirect
 	github.com/scylladb/go-reflectx v1.0.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.68.0 // indirect

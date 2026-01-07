@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-core-fx/fiberfx"
 	"github.com/go-core-fx/logger"
+	"github.com/go-core-fx/redisfx"
 	"github.com/pingplex/pingplex/internal/config"
 	"github.com/pingplex/pingplex/internal/db"
 	"github.com/pingplex/pingplex/internal/server"
@@ -22,6 +23,7 @@ func Run() {
 		fiberfx.Module(),
 		gocqlfx.Module(),
 		gocqlxfx.Module(),
+		redisfx.Module(),
 		//
 		// APP MODULES
 		config.Module(),
