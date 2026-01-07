@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/go-core-fx/fiberfx"
+	"github.com/go-core-fx/redisfx"
 	"github.com/pingplex/pingplex/pkg/gocqlfx"
 	"go.uber.org/fx"
 )
@@ -23,6 +24,11 @@ func Module() fx.Option {
 				Keyspace: cfg.Database.Keyspace,
 				Username: cfg.Database.Username,
 				Password: cfg.Database.Password,
+			}
+		}),
+		fx.Provide(func(cfg Config) redisfx.Config {
+			return redisfx.Config{
+				URL: cfg.Redis.URL,
 			}
 		}),
 	)

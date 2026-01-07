@@ -20,9 +20,14 @@ type database struct {
 	Password string   `koanf:"password"`
 }
 
+type redis struct {
+	URL string `koanf:"url"`
+}
+
 type Config struct {
 	HTTP     http     `koanf:"http"`
 	Database database `koanf:"database"`
+	Redis    redis    `koanf:"redis"`
 }
 
 func Default() Config {
@@ -37,6 +42,9 @@ func Default() Config {
 			Keyspace: "pingplex",
 			Username: "",
 			Password: "",
+		},
+		Redis: redis{
+			URL: "redis://localhost:6379/0",
 		},
 	}
 }
