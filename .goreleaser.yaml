@@ -19,6 +19,10 @@ builds:
       - arm64
     ldflags:
       - -s -w
+      - -X main.appVersion={{.Version}}
+      - -X main.appReleaseID={{ .Env.RELEASE_ID }}
+      - -X main.appBuildDate={{.Date}}
+      - -X main.appGitCommit={{.FullCommit}}
 
 archives:
   - formats: ["tar.gz"]

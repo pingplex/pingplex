@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/go-core-fx/fiberfx"
+	"github.com/go-core-fx/healthfx"
 	"github.com/go-core-fx/logger"
 	"github.com/go-core-fx/redisfx"
 	"github.com/pingplex/pingplex/internal/config"
@@ -15,7 +16,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func Run() {
+func Run(version healthfx.Version) {
 	fx.New(
 		// CORE MODULES
 		logger.Module(),
@@ -24,6 +25,7 @@ func Run() {
 		gocqlfx.Module(),
 		gocqlxfx.Module(),
 		redisfx.Module(),
+		healthfx.Module(),
 		//
 		// APP MODULES
 		config.Module(),
@@ -34,6 +36,7 @@ func Run() {
 		// BUSINESS MODULES
 		// example.Module(),
 		//
+		fx.Supply(version),
 		fx.Invoke(func(lc fx.Lifecycle, logger *zap.Logger) {
 			lc.Append(fx.Hook{
 				OnStart: func(_ context.Context) error {

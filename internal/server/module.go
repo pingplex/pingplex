@@ -2,7 +2,11 @@ package server
 
 import (
 	"github.com/go-core-fx/fiberfx"
+	"github.com/go-core-fx/fiberfx/handler"
+	"github.com/go-core-fx/fiberfx/health"
+	"github.com/go-core-fx/fiberfx/validation"
 	"github.com/go-core-fx/logger"
+	"github.com/gofiber/fiber/v2"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 )
@@ -19,15 +23,27 @@ func Module() fx.Option {
 			return opts
 		}),
 
-		// fx.Provide(
-		// 	handlers.NewMessagesHandler,
-		// 	fx.Private,
-		// ),
+		fx.Provide(
+			fx.Annotate(health.NewHandler, fx.ResultTags(`group:"handlers"`)), fx.Private,
+			// fx.Annotate(stacks.NewHandler, fx.ResultTags(`group:"handlers"`)), fx.Private,
+		),
 
-		// fx.Invoke(func(app *fiber.App, messages *handlers.MessagesHandler) {
-		// 	api := app.Group("/api/v1")
+		fx.Invoke(
+			fx.Annotate(
+				func(handlers []handler.Handler, app *fiber.App) {
+					// Swagger documentation
+					// app.Get("/swagger/*", fiberSwagger.WrapHandler)
 
-		// 	messages.Register(api.Group("/messages"))
-		// }),
+					// Version 1 API group
+					v1 := app.Group("/api/v1")
+					v1.Use(validation.Middleware)
+
+					for _, h := range handlers {
+						h.Register(v1)
+					}
+				},
+				fx.ParamTags(`group:"handlers"`),
+			),
+		),
 	)
 }
