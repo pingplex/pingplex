@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/go-core-fx/config"
 )
@@ -14,10 +15,12 @@ type http struct {
 }
 
 type database struct {
-	Hosts    []string `koanf:"hosts"`
-	Keyspace string   `koanf:"keyspace"`
-	Username string   `koanf:"username"`
-	Password string   `koanf:"password"`
+	URL string `koanf:"url"`
+
+	ConnMaxIdleTime time.Duration `koanf:"conn_max_idle_time"`
+	ConnMaxLifetime time.Duration `koanf:"conn_max_lifetime"`
+	MaxOpenConns    int           `koanf:"max_open_conns"`
+	MaxIdleConns    int           `koanf:"max_idle_conns"`
 }
 
 type redis struct {
@@ -31,6 +34,7 @@ type Config struct {
 }
 
 func Default() Config {
+	//nolint:mnd // default values
 	return Config{
 		HTTP: http{
 			Address:     "127.0.0.1:3000",
@@ -38,10 +42,12 @@ func Default() Config {
 			Proxies:     []string{},
 		},
 		Database: database{
-			Hosts:    []string{"127.0.0.1:9042"},
-			Keyspace: "pingplex",
-			Username: "",
-			Password: "",
+			URL: "sqlite://localhost/data/metadata.db?_pragma=foreign_keys(1)&_pragma=journal_mode(WAL)&_pragma=busy_timeout(5000)",
+
+			ConnMaxIdleTime: 5 * time.Minute,
+			ConnMaxLifetime: 30 * time.Minute,
+			MaxOpenConns:    1, // SQLite typically benefits from single writer
+			MaxIdleConns:    1,
 		},
 		Redis: redis{
 			URL: "redis://localhost:6379/0",

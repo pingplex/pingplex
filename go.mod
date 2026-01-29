@@ -5,16 +5,22 @@ go 1.25.0
 require (
 	github.com/go-core-fx/config v0.1.0
 	github.com/go-core-fx/fiberfx v0.3.1-0.20260109013855-57cd97e4ad05
+	github.com/go-core-fx/goosefx v0.0.1
 	github.com/go-core-fx/healthfx v0.0.2-0.20260109013230-f7729a0a06bc
 	github.com/go-core-fx/logger v0.0.1
 	github.com/go-core-fx/redisfx v0.0.0-20251029094515-c9e3d82dfaa2
+	github.com/go-core-fx/sqlfx v0.0.2-0.20260129052111-5d239a46be80
 	github.com/gocql/gocql v1.7.0
 	github.com/gofiber/fiber/v2 v2.52.10
+	github.com/pressly/goose/v3 v3.26.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/samber/lo v1.52.0
 	github.com/scylladb/gocqlx/v3 v3.0.4
+	github.com/uptrace/bun v1.2.16
+	github.com/uptrace/bun/dialect/sqlitedialect v1.2.16
 	go.uber.org/fx v1.24.0
 	go.uber.org/zap v1.27.1
+	modernc.org/sqlite v1.38.2
 )
 
 require (
@@ -25,6 +31,7 @@ require (
 	github.com/clipperhouse/stringish v0.1.1 // indirect
 	github.com/clipperhouse/uax29/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.10 // indirect
 	github.com/go-core-fx/fxutil v0.0.0-20251027105421-acea37162eb9 // indirect
@@ -34,6 +41,7 @@ require (
 	github.com/go-viper/mapstructure/v2 v2.4.0 // indirect
 	github.com/gofiber/contrib/fiberzap/v2 v2.1.6 // indirect
 	github.com/google/uuid v1.6.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/klauspost/compress v1.18.2 // indirect
 	github.com/knadh/koanf/maps v0.1.2 // indirect
@@ -46,16 +54,24 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.19 // indirect
+	github.com/mfridman/interpolate v0.0.2 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
+	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.67.5 // indirect
 	github.com/prometheus/procfs v0.19.2 // indirect
+	github.com/puzpuzpuz/xsync/v3 v3.5.1 // indirect
 	github.com/redis/go-redis/v9 v9.17.2 // indirect
+	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/scylladb/go-reflectx v1.0.1 // indirect
+	github.com/sethvargo/go-retry v0.3.0 // indirect
+	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.69.0 // indirect
+	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
+	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	go.opentelemetry.io/otel v1.39.0 // indirect
 	go.opentelemetry.io/otel/trace v1.39.0 // indirect
 	go.uber.org/dig v1.19.0 // indirect
@@ -63,10 +79,15 @@ require (
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/crypto v0.46.0 // indirect
+	golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b // indirect
+	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.40.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
+	modernc.org/libc v1.66.3 // indirect
+	modernc.org/mathutil v1.7.1 // indirect
+	modernc.org/memory v1.11.0 // indirect
 )
 
 // Use the latest version of scylladb/gocql; check for updates at https://github.com/scylladb/gocql/releases

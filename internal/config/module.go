@@ -3,7 +3,7 @@ package config
 import (
 	"github.com/go-core-fx/fiberfx"
 	"github.com/go-core-fx/redisfx"
-	"github.com/pingplex/pingplex/pkg/gocqlfx"
+	"github.com/go-core-fx/sqlfx"
 	"go.uber.org/fx"
 )
 
@@ -18,18 +18,22 @@ func Module() fx.Option {
 				Proxies:     cfg.HTTP.Proxies,
 			}
 		}),
-		fx.Provide(func(cfg Config) gocqlfx.Config {
-			return gocqlfx.Config{
-				Hosts:    cfg.Database.Hosts,
-				Keyspace: cfg.Database.Keyspace,
-				Username: cfg.Database.Username,
-				Password: cfg.Database.Password,
-			}
-		}),
-		fx.Provide(func(cfg Config) redisfx.Config {
-			return redisfx.Config{
-				URL: cfg.Redis.URL,
-			}
-		}),
+		fx.Provide(
+			func(cfg Config) redisfx.Config {
+				return redisfx.Config{
+					URL: cfg.Redis.URL,
+				}
+			},
+			func(cfg Config) sqlfx.Config {
+				return sqlfx.Config{
+					URL: cfg.Database.URL,
+
+					ConnMaxIdleTime: cfg.Database.ConnMaxIdleTime,
+					ConnMaxLifetime: cfg.Database.ConnMaxLifetime,
+					MaxOpenConns:    cfg.Database.MaxOpenConns,
+					MaxIdleConns:    cfg.Database.MaxIdleConns,
+				}
+			},
+		),
 	)
 }
