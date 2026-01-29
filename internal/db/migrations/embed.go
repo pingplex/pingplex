@@ -2,7 +2,7 @@ package migrations
 
 import "embed"
 
-// Files contains *.cql schema migration files.
+// FS contains *sql schema migration files.
 //
-//go:embed *.cql
-var Files embed.FS
+//go:embed *.sql
+var FS embed.FS
