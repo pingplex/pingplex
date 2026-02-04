@@ -38,8 +38,6 @@ github.com/go-core-fx/logger v0.0.1 h1:e3iJPEfV09fAZnVdROhcpDEbw7DHaNfY/OWCLX0wi
 github.com/go-core-fx/logger v0.0.1/go.mod h1:dvExTnpqUry/Qr0x0rg8UiKVUPv3PBb1JT/0llX5NWc=
 github.com/go-core-fx/redisfx v0.0.0-20251029094515-c9e3d82dfaa2 h1:sBOvVJ3HEOHTKLVhqzGwL15VGzAIoHDm4wPFOu7hRZs=
 github.com/go-core-fx/redisfx v0.0.0-20251029094515-c9e3d82dfaa2/go.mod h1:XUDPoiA2Z3BjbPVr0izYYUiq63nGxqsQNw/fhGWZqUk=
-github.com/go-core-fx/sqlfx v0.0.1 h1:yOMNjSnlie+3wka9SR6UcokQ3cg4aB2EkrKexVcn3g0=
-github.com/go-core-fx/sqlfx v0.0.1/go.mod h1:D8fFoIeCUGthMN2nOeYIqs+yYH5CEDJBNJeMP4+Usk8=
 github.com/go-core-fx/sqlfx v0.0.2-0.20260129052111-5d239a46be80 h1:Gu2lqdtB6d7Fu4IbjIHfZHkQpYar6KiqueyU6xS6dqg=
 github.com/go-core-fx/sqlfx v0.0.2-0.20260129052111-5d239a46be80/go.mod h1:D8fFoIeCUGthMN2nOeYIqs+yYH5CEDJBNJeMP4+Usk8=
 github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
