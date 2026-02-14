@@ -8,9 +8,12 @@ import (
 	"github.com/go-core-fx/healthfx"
 	"github.com/go-core-fx/logger"
 	"github.com/go-core-fx/sqlfx"
+	"github.com/go-core-fx/telegofx"
+	"github.com/pingplex/pingplex/internal/bot"
 	"github.com/pingplex/pingplex/internal/config"
 	"github.com/pingplex/pingplex/internal/db"
 	"github.com/pingplex/pingplex/internal/server"
+	"github.com/pingplex/pingplex/internal/users"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 )
@@ -23,7 +26,7 @@ func Run(version healthfx.Version) {
 		fiberfx.Module(),
 		sqlfx.Module(),
 		goosefx.Module(),
-		// gocqlfx.Module(),
+		telegofx.Module(true),
 		// gocqlxfx.Module(),
 		// redisfx.Module(),
 		healthfx.Module(),
@@ -32,10 +35,10 @@ func Run(version healthfx.Version) {
 		config.Module(),
 		db.Module(),
 		server.Module(),
-		// bot.Module(),
+		bot.Module(),
 		//
 		// BUSINESS MODULES
-		// example.Module(),
+		users.Module(),
 		//
 		fx.Supply(version),
 		fx.Invoke(func(lc fx.Lifecycle, logger *zap.Logger) {

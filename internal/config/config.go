@@ -27,10 +27,15 @@ type redis struct {
 	URL string `koanf:"url"`
 }
 
+type telegram struct {
+	Token string `koanf:"token"`
+}
+
 type Config struct {
 	HTTP     http     `koanf:"http"`
 	Database database `koanf:"database"`
 	Redis    redis    `koanf:"redis"`
+	Telegram telegram `koanf:"telegram"`
 }
 
 func Default() Config {
@@ -51,6 +56,9 @@ func Default() Config {
 		},
 		Redis: redis{
 			URL: "redis://localhost:6379/0",
+		},
+		Telegram: telegram{
+			Token: "",
 		},
 	}
 }

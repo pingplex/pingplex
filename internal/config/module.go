@@ -4,6 +4,7 @@ import (
 	"github.com/go-core-fx/fiberfx"
 	"github.com/go-core-fx/redisfx"
 	"github.com/go-core-fx/sqlfx"
+	"github.com/go-core-fx/telegofx"
 	"go.uber.org/fx"
 )
 
@@ -11,14 +12,14 @@ func Module() fx.Option {
 	return fx.Module(
 		"config",
 		fx.Provide(New),
-		fx.Provide(func(cfg Config) fiberfx.Config {
-			return fiberfx.Config{
-				Address:     cfg.HTTP.Address,
-				ProxyHeader: cfg.HTTP.ProxyHeader,
-				Proxies:     cfg.HTTP.Proxies,
-			}
-		}),
 		fx.Provide(
+			func(cfg Config) fiberfx.Config {
+				return fiberfx.Config{
+					Address:     cfg.HTTP.Address,
+					ProxyHeader: cfg.HTTP.ProxyHeader,
+					Proxies:     cfg.HTTP.Proxies,
+				}
+			},
 			func(cfg Config) redisfx.Config {
 				return redisfx.Config{
 					URL: cfg.Redis.URL,
@@ -34,6 +35,17 @@ func Module() fx.Option {
 					MaxIdleConns:    cfg.Database.MaxIdleConns,
 				}
 			},
+			func(cfg Config) telegofx.Config {
+				return telegofx.Config{
+					Token: cfg.Telegram.Token,
+				}
+			},
 		),
+
+		// fx.Provide(
+		// 	func(cfg Config) {
+		// 		return
+		// 	},
+		// ),
 	)
 }
