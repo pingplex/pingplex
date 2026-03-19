@@ -3,6 +3,7 @@ module github.com/pingplex/pingplex
 go 1.25.5
 
 require (
+	github.com/go-core-fx/bunfx v0.0.1
 	github.com/go-core-fx/config v0.1.0
 	github.com/go-core-fx/fiberfx v0.3.1-0.20260109013855-57cd97e4ad05
 	github.com/go-core-fx/goosefx v0.0.1
@@ -25,6 +26,7 @@ require (
 )
 
 require (
+	github.com/alexlast/bunzap v0.1.0 // indirect
 	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/ansrivas/fiberprometheus/v2 v2.15.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
