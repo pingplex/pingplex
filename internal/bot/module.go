@@ -2,7 +2,10 @@ package bot
 
 import (
 	"github.com/go-core-fx/logger"
+	"github.com/go-core-fx/telegofx"
 	"github.com/mymmrac/telego"
+	"github.com/pingplex/pingplex/internal/bot/handler"
+	"github.com/pingplex/pingplex/internal/bot/handlers/start"
 	"go.uber.org/fx"
 )
 
@@ -13,22 +16,18 @@ func Module() fx.Option {
 		fx.Provide(func() []telego.BotOption {
 			return nil
 		}),
-		// // Provide handlers
-		// fx.Provide(
-		// 	fx.Annotate(start.New, fx.ResultTags(`group:"handlers"`)),
-		// 	fx.Annotate(mermaid.New, fx.ResultTags(`group:"handlers"`)),
-		// 	fx.Annotate(help.New, fx.ResultTags(`group:"handlers"`)),
-		// ),
-		// // Register handlers
-		// fx.Invoke(
-		// 	fx.Annotate(
-		// 		func(handlers []handler.Handler, r *telegofx.Router) {
-		// 			for _, h := range handlers {
-		// 				h.Register(r)
-		// 			}
-		// 		},
-		// 		fx.ParamTags(`group:"handlers"`),
-		// 	),
-		// ),
+		fx.Provide(
+			fx.Annotate(start.New, fx.ResultTags(`group:"handlers"`)),
+		),
+		fx.Invoke(
+			fx.Annotate(
+				func(handlers []handler.Handler, r *telegofx.Router) {
+					for _, h := range handlers {
+						h.Register(r)
+					}
+				},
+				fx.ParamTags(`group:"handlers"`),
+			),
+		),
 	)
 }
