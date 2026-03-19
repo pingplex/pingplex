@@ -45,13 +45,13 @@ func (r *Repository) RegisterOrLogin(ctx context.Context, ident Identity) (*User
 	// Begin transaction
 	err = r.db.RunInTx(ctx, nil, func(ctx context.Context, tx bun.Tx) error {
 		if _, err = tx.NewInsert().
-			Model(&newUser).
+			Model(newUser).
 			Exec(ctx); err != nil {
 			return fmt.Errorf("failed to create user: %w", err)
 		}
 
 		if _, err = tx.NewInsert().
-			Model(&newIdentity).
+			Model(newIdentity).
 			Exec(ctx); err != nil {
 			return fmt.Errorf("failed to create identity: %w", err)
 		}

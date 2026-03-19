@@ -9,7 +9,7 @@ func Module() fx.Option {
 	return fx.Module(
 		"users",
 		logger.WithNamedLogger("users"),
-		fx.Provide(NewRepository),
+		fx.Provide(NewRepository, fx.Private),
 		fx.Provide(New),
 	)
 }
