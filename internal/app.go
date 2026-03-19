@@ -3,6 +3,7 @@ package internal
 import (
 	"context"
 
+	"github.com/go-core-fx/bunfx"
 	"github.com/go-core-fx/fiberfx"
 	"github.com/go-core-fx/goosefx"
 	"github.com/go-core-fx/healthfx"
@@ -27,7 +28,7 @@ func Run(version healthfx.Version) {
 		sqlfx.Module(),
 		goosefx.Module(),
 		telegofx.Module(true),
-		// gocqlxfx.Module(),
+		bunfx.Module(),
 		// redisfx.Module(),
 		healthfx.Module(),
 		//
@@ -44,11 +45,11 @@ func Run(version healthfx.Version) {
 		fx.Invoke(func(lc fx.Lifecycle, logger *zap.Logger) {
 			lc.Append(fx.Hook{
 				OnStart: func(_ context.Context) error {
-					logger.Info("app started")
+					logger.Info("🚀 app started")
 					return nil
 				},
 				OnStop: func(_ context.Context) error {
-					logger.Info("app stopped")
+					logger.Info("👋 app stopped")
 					return nil
 				},
 			})
