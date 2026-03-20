@@ -3,10 +3,13 @@ package users
 import "time"
 
 type Status string
+type Provider string
 
 const (
 	StatusActive   Status = "active"
 	StatusInactive Status = "inactive"
+
+	ProviderTelegram Provider = "telegram"
 )
 
 type User struct {
@@ -18,7 +21,7 @@ type User struct {
 }
 
 type Identity struct {
-	Provider     string
+	Provider     Provider
 	ProviderID   string
 	ProviderData string
 }

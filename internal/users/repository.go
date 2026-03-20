@@ -37,7 +37,7 @@ func (r *Repository) RegisterOrLogin(ctx context.Context, ident Identity) (*User
 	// Create the identity
 	newIdentity := newIdentity(
 		newUser.ID,
-		ident.Provider,
+		string(ident.Provider),
 		ident.ProviderID,
 		ident.ProviderData,
 	)
