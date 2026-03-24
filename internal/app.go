@@ -10,6 +10,7 @@ import (
 	"github.com/go-core-fx/logger"
 	"github.com/go-core-fx/sqlfx"
 	"github.com/go-core-fx/telegofx"
+	"github.com/pingplex/pingplex/internal/agents"
 	"github.com/pingplex/pingplex/internal/bot"
 	"github.com/pingplex/pingplex/internal/config"
 	"github.com/pingplex/pingplex/internal/db"
@@ -39,6 +40,7 @@ func Run(version healthfx.Version) {
 		bot.Module(),
 		//
 		// BUSINESS MODULES
+		agents.Module(),
 		users.Module(),
 		//
 		fx.Supply(version),

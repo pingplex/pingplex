@@ -47,7 +47,7 @@ func Default() Config {
 			Proxies:     []string{},
 		},
 		Database: database{
-			URL: "sqlite://localhost/data/metadata.db?_pragma=foreign_keys(1)&_pragma=journal_mode(WAL)&_pragma=busy_timeout(5000)",
+			URL: "sqlite://localhost/./data/metadata.db?_pragma=foreign_keys(1)&_pragma=journal_mode(WAL)&_pragma=busy_timeout(5000)",
 
 			ConnMaxIdleTime: 5 * time.Minute,
 			ConnMaxLifetime: 30 * time.Minute,
