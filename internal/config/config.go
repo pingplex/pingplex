@@ -23,6 +23,15 @@ type database struct {
 	MaxIdleConns    int           `koanf:"max_idle_conns"`
 }
 
+type usersDatabase struct {
+	URLTemplate string `koanf:"url_template"`
+
+	ConnMaxIdleTime time.Duration `koanf:"conn_max_idle_time"`
+	ConnMaxLifetime time.Duration `koanf:"conn_max_lifetime"`
+	MaxOpenConns    int           `koanf:"max_open_conns"`
+	MaxIdleConns    int           `koanf:"max_idle_conns"`
+}
+
 type redis struct {
 	URL string `koanf:"url"`
 }
@@ -32,10 +41,11 @@ type telegram struct {
 }
 
 type Config struct {
-	HTTP     http     `koanf:"http"`
-	Database database `koanf:"database"`
-	Redis    redis    `koanf:"redis"`
-	Telegram telegram `koanf:"telegram"`
+	HTTP          http          `koanf:"http"`
+	Database      database      `koanf:"database"`
+	Redis         redis         `koanf:"redis"`
+	Telegram      telegram      `koanf:"telegram"`
+	UsersDatabase usersDatabase `koanf:"users_database"`
 }
 
 func Default() Config {
@@ -59,6 +69,14 @@ func Default() Config {
 		},
 		Telegram: telegram{
 			Token: "",
+		},
+		UsersDatabase: usersDatabase{
+			URLTemplate: "sqlite://localhost/./data/users/user_{user_id}?_pragma=foreign_keys(1)&_pragma=journal_mode(WAL)&_pragma=busy_timeout(5000)",
+
+			ConnMaxIdleTime: 5 * time.Minute,
+			ConnMaxLifetime: 30 * time.Minute,
+			MaxOpenConns:    1, // SQLite typically benefits from single writer
+			MaxIdleConns:    0,
 		},
 	}
 }

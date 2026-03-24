@@ -5,6 +5,7 @@ import (
 	"github.com/go-core-fx/redisfx"
 	"github.com/go-core-fx/sqlfx"
 	"github.com/go-core-fx/telegofx"
+	"github.com/pingplex/pingplex/internal/userdb"
 	"go.uber.org/fx"
 )
 
@@ -42,10 +43,17 @@ func Module() fx.Option {
 			},
 		),
 
-		// fx.Provide(
-		// 	func(cfg Config) {
-		// 		return
-		// 	},
-		// ),
+		fx.Provide(
+			func(cfg Config) userdb.Config {
+				return userdb.Config{
+					URLTemplate: cfg.UsersDatabase.URLTemplate,
+
+					ConnMaxIdleTime: cfg.UsersDatabase.ConnMaxIdleTime,
+					ConnMaxLifetime: cfg.UsersDatabase.ConnMaxLifetime,
+					MaxOpenConns:    cfg.UsersDatabase.MaxOpenConns,
+					MaxIdleConns:    cfg.UsersDatabase.MaxIdleConns,
+				}
+			},
+		),
 	)
 }

@@ -12,7 +12,10 @@ type Service struct {
 	logger *zap.Logger
 }
 
-func New(users *Repository, logger *zap.Logger) *Service {
+func New(
+	users *Repository,
+	logger *zap.Logger,
+) *Service {
 	return &Service{
 		users: users,
 
@@ -21,7 +24,12 @@ func New(users *Repository, logger *zap.Logger) *Service {
 }
 
 func (s *Service) RegisterOrLogin(ctx context.Context, ident Identity) (*User, error) {
-	return s.users.RegisterOrLogin(ctx, ident)
+	user, err := s.users.RegisterOrLogin(ctx, ident)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }
 
 func (s *Service) Login(ctx context.Context, ident Identity) (*User, error) {
