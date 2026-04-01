@@ -4,9 +4,11 @@ import (
 	"github.com/go-core-fx/logger"
 	"github.com/go-core-fx/telegofx"
 	"github.com/mymmrac/telego"
+	th "github.com/mymmrac/telego/telegohandler"
 	"github.com/pingplex/pingplex/internal/bot/handler"
 	"github.com/pingplex/pingplex/internal/bot/handlers/agents"
 	"github.com/pingplex/pingplex/internal/bot/handlers/start"
+	"github.com/pingplex/pingplex/internal/bot/handlers/targets"
 	"github.com/pingplex/pingplex/internal/bot/middlewares/userauth"
 	"github.com/valyala/fasthttp"
 	"github.com/valyala/fasthttp/fasthttpproxy"
@@ -27,6 +29,7 @@ func Module() fx.Option {
 
 			fx.Annotate(start.New, fx.ResultTags(`group:"handlers"`)),
 			fx.Annotate(agents.New, fx.ResultTags(`group:"handlers"`)),
+			fx.Annotate(targets.New, fx.ResultTags(`group:"handlers"`)),
 		),
 		fx.Invoke(
 			fx.Annotate(
