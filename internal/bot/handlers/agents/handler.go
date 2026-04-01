@@ -1,9 +1,7 @@
 package agents
 
 import (
-	"errors"
 	"fmt"
-	"strconv"
 	"strings"
 
 	"github.com/go-core-fx/telegofx"
@@ -11,6 +9,7 @@ import (
 	th "github.com/mymmrac/telego/telegohandler"
 	"github.com/pingplex/pingplex/internal/agents"
 	"github.com/pingplex/pingplex/internal/bot/handler"
+	"github.com/pingplex/pingplex/internal/bot/middlewares/userauth"
 	"github.com/pingplex/pingplex/internal/users"
 	"go.uber.org/zap"
 )
@@ -18,10 +17,6 @@ import (
 const (
 	listEmptyText = "У вас пока нет зарегистрированных агентов."
 	failureText   = "Не удалось получить список агентов. Попробуйте позже."
-)
-
-var (
-	errUserIsNil = errors.New("user is nil")
 )
 
 type Handler struct {
@@ -52,15 +47,9 @@ func (h *Handler) handleAgents(ctx *th.Context, update telego.Update) error {
 		return nil
 	}
 
-	identity, err := identityFromTelegramUser(update.Message.From)
+	user, err := userauth.User(ctx)
 	if err != nil {
-		h.logger.Error("failed to map telegram user to identity", zap.Error(err))
-		return h.reply(ctx, update.Message.Chat.ID, failureText)
-	}
-
-	user, err := h.users.RegisterOrLogin(ctx, *identity)
-	if err != nil {
-		h.logger.Error("failed to register or login telegram user", zap.Error(err))
+		h.logger.Error("failed to get user from context", zap.Error(err))
 		return h.reply(ctx, update.Message.Chat.ID, failureText)
 	}
 
@@ -94,16 +83,4 @@ func (h *Handler) reply(ctx *th.Context, chatID int64, text string) error {
 	}
 
 	return nil
-}
-
-func identityFromTelegramUser(user *telego.User) (*users.Identity, error) {
-	if user == nil {
-		return nil, errUserIsNil
-	}
-
-	return &users.Identity{
-		Provider:     users.ProviderTelegram,
-		ProviderID:   strconv.FormatInt(user.ID, 10),
-		ProviderData: "",
-	}, nil
 }
