@@ -6,12 +6,15 @@ import (
 	"github.com/go-core-fx/telegofx"
 	"github.com/mymmrac/telego"
 	th "github.com/mymmrac/telego/telegohandler"
+	tu "github.com/mymmrac/telego/telegoutil"
 	"github.com/pingplex/pingplex/internal/bot/handler"
+	"github.com/pingplex/pingplex/internal/bot/middlewares/userauth"
 	"go.uber.org/zap"
 )
 
 const (
 	welcomeText = "Welcome! Your account is ready."
+	failureText = "Something went wrong. Please try again later."
 )
 
 type Handler struct {
@@ -38,14 +41,17 @@ func (h *Handler) handleStart(ctx *th.Context, update telego.Update) error {
 		return nil
 	}
 
+	_, err := userauth.User(ctx)
+	if err != nil {
+		h.logger.Error("failed to get user from context", zap.Error(err))
+		return h.reply(ctx, update.Message.Chat.ID, failureText)
+	}
+
 	return h.reply(ctx, update.Message.Chat.ID, welcomeText)
 }
 
 func (h *Handler) reply(ctx *th.Context, chatID int64, text string) error {
-	_, err := ctx.Bot().SendMessage(ctx, &telego.SendMessageParams{
-		ChatID: telego.ChatID{ID: chatID, Username: ""},
-		Text:   text,
-	})
+	_, err := ctx.Bot().SendMessage(ctx, tu.Message(tu.ID(chatID), text))
 	if err != nil {
 		return fmt.Errorf("send telegram message: %w", err)
 	}

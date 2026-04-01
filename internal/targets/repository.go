@@ -5,9 +5,9 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"strings"
 
 	"github.com/google/uuid"
+	"github.com/pingplex/pingplex/internal/db"
 	"github.com/uptrace/bun"
 )
 
@@ -27,7 +27,7 @@ func (r *Repository) Create(ctx context.Context, userID string, in CreateTargetI
 	item := newTarget(uuid.NewString(), userID, in)
 
 	if _, err := r.db.NewInsert().Model(item).Exec(ctx); err != nil {
-		if strings.Contains(err.Error(), "UNIQUE constraint failed") {
+		if db.IsUniqueViolation(err) {
 			return nil, fmt.Errorf("duplicate target name for owner: %w", ErrValidation)
 		}
 
@@ -112,7 +112,7 @@ func (r *Repository) Update(ctx context.Context, userID string, id string, in Up
 		Where("status != ?", StatusDeleted).
 		Exec(ctx)
 	if err != nil {
-		if strings.Contains(err.Error(), "UNIQUE constraint failed") {
+		if db.IsUniqueViolation(err) {
 			return nil, fmt.Errorf("duplicate target name for owner: %w", ErrValidation)
 		}
 
