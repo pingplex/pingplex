@@ -15,6 +15,7 @@ import (
 	"github.com/pingplex/pingplex/internal/config"
 	"github.com/pingplex/pingplex/internal/db"
 	"github.com/pingplex/pingplex/internal/server"
+	"github.com/pingplex/pingplex/internal/targets"
 	"github.com/pingplex/pingplex/internal/userdb"
 	"github.com/pingplex/pingplex/internal/users"
 	"go.uber.org/fx"
@@ -43,6 +44,7 @@ func Run(version healthfx.Version) {
 		//
 		// BUSINESS MODULES
 		agents.Module(),
+		targets.Module(),
 		users.Module(),
 		//
 		fx.Supply(version),
